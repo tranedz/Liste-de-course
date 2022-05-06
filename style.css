@@ -49,6 +49,7 @@ header {
 
 .heading-container {
     margin-bottom: 6px;
+    padding: 20px 0;
 }
 
 .wrapper {
@@ -202,10 +203,21 @@ span {
 }
 
 @media (max-width:400px) {
+    body {
+        background-color: #ECF0F1;
+    }
+    header {
+        box-shadow: none
+    }
     .wrapper {
+        padding: 0 20px;
         box-shadow: none;
+        background-color: transparent;
     }
     input {
         width: 250px;
+    }
+    #input-button-container {
+        background-color: white;
     }
 }
