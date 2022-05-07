@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -14,17 +14,37 @@
 <body>
     <header>
         <div class="logo-nav-container">
-            <div class="logo-container"></div>
+            <div class="logo-container">Logo</div>
         </div>
+        
     </header>
     <main>
+        <div class="styles-wrapper">
+            <form action="#" id="style-form">
+                <fieldset>
+                    <legend>Changer de thème</legend>
+                    <label for="blue">Thème 1
+                        <input class="theme1" type="radio" name="color" value="#00bcd4">
+                    </label>
+                    
+                    <label for="yellow">Thème 2
+                        <input class="theme2" type="radio" name="color" value="yellow">
+                    </label>
+                    
+                    <label for="green">Thème 3
+                        <input class="theme3" type="radio" name="color" value="green">
+                    </label>
+                </fieldset>
+            </form>
+        </div>
         <div class="wrapper">
             <div class="heading-container">
                 <h2>Keep Ideas</h2>
+                <h5> - My shopping list - </h5>
             </div>
-            <form action="#">
+            <form action="#" id="main-form">
                 <div id="input-button-container">
-                    <input type="text" placeholder="Nouvel article..." value="">
+                    <input id="input-text" type="text" placeholder="Nouvel article..." value="">
                     <button type="submit">
                         <span id="add-btn" class="material-symbols-outlined">
                             add_task
@@ -54,7 +74,11 @@
             </div>
         </div>
     </main>
-
+    <footer>
+        <div>
+            <p>Tous droits réservés, mai 2022.</p>
+        </div>
+    </footer>
     <script src="./script.js"></script>
 </body>
 
