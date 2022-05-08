@@ -16,35 +16,18 @@
         <div class="logo-nav-container">
             <div class="logo-container">Logo</div>
         </div>
-        
+
     </header>
     <main>
-        <div class="styles-wrapper">
-            <form action="#" id="style-form">
-                <fieldset>
-                    <legend>Changer de thème</legend>
-                    <label for="blue">Thème 1
-                        <input class="theme1" type="radio" name="color" value="#00bcd4">
-                    </label>
-                    
-                    <label for="yellow">Thème 2
-                        <input class="theme2" type="radio" name="color" value="yellow">
-                    </label>
-                    
-                    <label for="green">Thème 3
-                        <input class="theme3" type="radio" name="color" value="green">
-                    </label>
-                </fieldset>
-            </form>
+        <div class="heading-container">
+            <h2>Keep Ideas</h2>
+            <h5> - My shopping list - </h5>
         </div>
         <div class="wrapper">
-            <div class="heading-container">
-                <h2>Keep Ideas</h2>
-                <h5> - My shopping list - </h5>
-            </div>
+
             <form action="#" id="main-form">
                 <div id="input-button-container">
-                    <input id="input-text" type="text" placeholder="Nouvel article..." value="">
+                    <input id="input-text" type="text" placeholder="Ajouter une idée..." value="" autocomplete="off">
                     <button type="submit">
                         <span id="add-btn" class="material-symbols-outlined">
                             add_task
@@ -52,27 +35,28 @@
                     </button>
                 </div>
             </form>
-            <section>
-                <ul>
-                    <!-- <li>
-                        <span class="material-symbols-outlined edit-btn">
-                            edit
-                        </span>
-                        <span class="item-name li-checked">Acheter des fruits</span>
+        </div>
+        <br>
+        <section>
+            <ul>
+                <!-- <li>
+                    <span class="material-symbols-outlined edit-btn">
+                        edit
+                    </span>
+                    <span class="item-name li-checked">Acheter des fruits</span>
 
-                        <span class="material-symbols-outlined close-btn">
-                            close
-                        </span>
-                    </li> -->
-                </ul>
-            </section>
+                    <span class="material-symbols-outlined close-btn">
+                        close
+                    </span>
+                </li> -->
+            </ul>
             <div id="message-container"></div>
             <div class="clear-btn-container">
                 <p><span id="clear-btn" class="material-symbols-outlined">
                         delete_forever
                     </span><br>Effacer la liste</p>
             </div>
-        </div>
+        </section>
     </main>
     <footer>
         <div>
