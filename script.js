@@ -12,7 +12,7 @@ document.querySelector('#msg-status').appendChild(message);
 
 let listUser = ["Apprendre JavaScript", "Apprendre HTML", "Apprendre CSS", "Apprendre NodeJS et ExpressJS"];
 
-input.focus();
+// input.focus();
 
 // Submit a new task
 form.addEventListener('submit', (e) => {
