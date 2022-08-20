@@ -226,7 +226,7 @@ btnDeleteList.addEventListener('click', deleteAllList)
 
 function deleteAllList(e) {
 
-    if (confirm('Cette action effacera toute la liste. Continuez ?') == true) {
+    if (confirm('Cette action effacera toute la liste. Continuer ?') == true) {
         deletingMessage("toute la liste");
 
         setTimeout(() => {
