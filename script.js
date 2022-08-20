@@ -10,18 +10,39 @@ let message = document.createElement('p');
 message.className = 'message';
 document.querySelector('#msg-status').appendChild(message);
 
-let listUser = ["Apprendre JavaScript", "Apprendre HTML", "Apprendre CSS", "Apprendre NodeJS et ExpressJS"];
+// let userList = ["Apprendre JavaScript", "Apprendre HTML", "Apprendre CSS", "Apprendre NodeJS et ExpressJS"];
 
-// input.focus();
+let getDataSaved;
 
-// Submit a new task
+// Vérifier l'existence de données dans le stockage
+// S'il y a des données convertir et récupérer
+// Sinon assigner un tableau vide
+if (localStorage.getItem("items") == null) {
+    getDataSaved = [];
+} else {
+    getDataSaved = JSON.parse(localStorage.getItem('items'))
+}
+
+
+// Ajouter une nouvelle tâche
 form.addEventListener('submit', (e) => {
     if (inputSize()) {
-        e.preventDefault();
-        newTask();
-        emptyListMessage();
-        // Empty field after submit
-        input.value = '';
+        if (limitCharacters()) {
+            e.preventDefault();
+
+            let inputValue = input.value;
+
+            getDataSaved.unshift(inputValue);
+
+            localStorage.setItem('items', JSON.stringify(getDataSaved));
+
+            newTask();
+            emptyListMessage();
+            // Vider le champ
+            input.value = '';
+        } else {
+            alert("Nombre de caractères limité à 30. Soyez plus bref ! :)");
+        }
     } else {
         alert("Vous n'avez encore rien écrit.");
     }
@@ -32,6 +53,8 @@ form.addEventListener('submit', (e) => {
 })
 
 
+
+
 function inputSize() {
     if (input.value.length > 0) {
         return true;
@@ -40,8 +63,17 @@ function inputSize() {
     }
 }
 
+function limitCharacters() {
+    if (input.value.length <= 30) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+// Créer les éléments de la nouvelle tâche : éléments existant dans la base de données
 function createTasks() {
-    for (let item of listUser) {
+    for (let item of getDataSaved) {
         task = document.createElement('li');
         task.textContent = item;
         ul.appendChild(task);
@@ -61,18 +93,15 @@ function createTasks() {
         btnDelete.addEventListener('click', deleteTask);
     }
 }
-
-
-
 createTasks();
 
-// Add new task
+// Créer les éléments de la nouvelle tâche : nouveaux éléments
 function newTask() {
     let userValue = input.value;
     const task = document.createElement('li');
     task.textContent = userValue;
     // task.classList = "task";
-    ul.appendChild(task);
+    ul.replaceChild(task, ul.firstChild);
 
     const btnUpdate = document.createElement('span');
     btnUpdate.textContent = "Modifier";
@@ -91,17 +120,29 @@ function newTask() {
 
 }
 
-// Get all btn for deleting / only existing tasks
+// Récupérer tous les boutons de suppression de tâche / tâches existantes uniquement
 for (let i = 0; i < allBtnDelete.length; i++) {
     const btnDelete = allBtnDelete[i];
     btnDelete.addEventListener('click', deleteTask);
-    // console.log(btnDelete)
 }
 
-// Delete a task of the list
+// Supprimer une tâche de la liste
 function deleteTask(e) {
     let taskName = e.target.parentElement.firstChild.textContent;
     deletingMessage(taskName);
+
+    // Effacer un élément du stockage local
+    for (const item of getDataSaved) {
+        if (item === taskName) {
+            let indexOfItem = getDataSaved.indexOf(item);
+            getDataSaved.splice(indexOfItem, 1);
+
+            localStorage.setItem('items', JSON.stringify(getDataSaved));
+            // console.log(getDataSaved);
+            break;
+        }
+
+    }
 
     setTimeout(() => {
         e.target.parentElement.remove();
@@ -116,7 +157,7 @@ function deleteTask(e) {
 
 function deletingMessage(content) {
 
-    // Loading simulation
+    // Simulation d'un chargement / réutilisable
     setTimeout(() => {
         message.textContent = `Suppression de : ${content}.`;
     }, 500)
@@ -143,7 +184,7 @@ function deletingMessage(content) {
     }, 3000);
 }
 
-
+// Message pour la liste vide
 function emptyListMessage() {
     if (ul.childElementCount === 0) {
         message.textContent = "Votre liste est vide. Besoin d'idées ?";
@@ -158,9 +199,8 @@ function emptyListMessage() {
 emptyListMessage();
 
 
+// Récupérer tous les boutons de suppression de tâche / tâches existantes uniquement
 const allBtnUpdate = document.querySelectorAll('.edit');
-// Update tasks
-// Get all btn for deleting / only existing tasks
 for (let i = 0; i < allBtnUpdate.length; i++) {
     const btnUpdate = allBtnUpdate[i];
     btnUpdate.addEventListener('click', updateTask);
@@ -214,11 +254,23 @@ function updateTask(e) {
         setTimeout(() => {
             message.textContent = '';
         }, 5000);
+
+        // mettre à jour un élément du stockage local
+        for (const item of getDataSaved) {
+            if (item === taskToUpdate) {
+                let indexOfItem = getDataSaved.indexOf(item);
+                getDataSaved.splice(indexOfItem, 1, oldItem.firstChild.textContent);
+
+                localStorage.setItem('items', JSON.stringify(getDataSaved));
+                break;
+            }
+
+        }
     })
 }
 
 
-
+//  Supprimer toute la liste
 const listItem = ul.children;
 const listItemPre = document.querySelectorAll('li');
 
@@ -227,20 +279,25 @@ btnDeleteList.addEventListener('click', deleteAllList)
 function deleteAllList(e) {
 
     if (confirm('Cette action effacera toute la liste. Continuer ?') == true) {
+        localStorage.clear();
         deletingMessage("toute la liste");
 
         setTimeout(() => {
+            // suppression des éléments existants
             for (const itemPre of listItemPre) {
                 itemPre.remove();
             }
-
+            // suppression des nouveaux éléments
             for (let i = 0; i < listItem.length; i++) {
                 const item = listItem[i];
                 item.remove();
             }
+            // Message liste vide
             emptyListMessage();
+
         }, 3000)
 
+        // Vérouiller le bouton et changer de couleur
         e.target.disabled = true;
         e.target.style.backgroundColor = "grey";
     }
