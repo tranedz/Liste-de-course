@@ -33,6 +33,7 @@ form.addEventListener('submit', (e) => {
             let inputValue = input.value;
 
             getDataSaved.unshift(inputValue);
+            // getDataSaved.push(inputValue);
 
             localStorage.setItem('items', JSON.stringify(getDataSaved));
 
@@ -100,8 +101,7 @@ function newTask() {
     let userValue = input.value;
     const task = document.createElement('li');
     task.textContent = userValue;
-    // task.classList = "task";
-    ul.replaceChild(task, ul.firstChild);
+    ul.appendChild(task);
 
     const btnUpdate = document.createElement('span');
     btnUpdate.textContent = "Modifier";
