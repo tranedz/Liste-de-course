@@ -156,3 +156,26 @@ li.item-input form {
   color: gray;
   font-size: 14px;
 }
+
+@media (max-width: 400px) {
+  .container {
+    width: 100%;
+  }
+  ul {
+    display: grid;
+    grid-template-columns: auto;
+    align-items: center;
+    list-style: none;
+    text-align: left;
+    padding-left: 0;
+    width: 100%;
+  }
+
+  li {
+    font-size: medium;
+  }
+
+  .horodatage {
+    font-size: small;
+  }
+}
