@@ -11,3 +11,8 @@ Les fonctionnalités :
 - Mise à jour : il est possible de modifier la tâche et son statut (en cliquant sur la tâche). Les modifications dans le DOM sont aussi appliquées dans le stockage local. Il sera bientôt possible d'avoir la date et l'heure de mise à jour.
 
 - Suppression : il est possible de supprimer une seule tâche et toute les tâches en même temps. La suppression se fait aussi dans le stockage local. Bientôt il sera possible de sélectionner des tâches à supprimer.
+
+TAF :
+
+- Ajouter un bouton "annuler" pour annuler si besoin la modification
+- Quand le texte dépasse les 30 caractères empêcher la perte de "input.value"

@@ -37,6 +37,14 @@ export function newTask() {
   // Stockage des données de création dans le stockage local
   localStorage.setItem('Data', JSON.stringify(getUserDataSaved));
 
+  // Horodatage
+  const horodatage = document.createElement('small');
+  horodatage.textContent = `Créée le ${userData.dateOfCreation.date_de_creation}
+    à ${userData.dateOfCreation.heure_de_creation}`;
+  horodatage.classList = "horodatage";
+
+  task.appendChild(horodatage);
+
   btnDelete.addEventListener('click', deleteTask);
 
   btnUpdate.addEventListener('click', updateTask);
